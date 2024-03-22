@@ -1,10 +1,10 @@
-import { createTRPCRouter, publicProcedure } from "..";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "..";
 
 
 export const appRouter =createTRPCRouter({
-    hello:publicProcedure.query((ctx)=>{
+    hello:protectedProcedure('admin').query((ctx)=>{
         
-        return {title:'News',content:'Lorem ipusm'}
+        return {title:'News no',content:'Lorem ipusm'}
     })
 })
 

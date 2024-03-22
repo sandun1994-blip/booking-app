@@ -11,9 +11,11 @@ const createContext =async(req:NextRequest)=>{
     })
 }
 
-const handler =(req:NextRequest)=>fetchRequestHandler({
+ const handler =(req:NextRequest)=>fetchRequestHandler({
     endpoint:'/api/trpc',
     req,
     router:appRouter,
     createContext:()=>createContext(req)
 })
+
+export {handler as GET ,handler as POST}

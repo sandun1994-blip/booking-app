@@ -45,3 +45,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## ngrok http --domain=sunbird-grand-iguana.ngrok-free.app 3000
 
 ## npm i @trpc/server @trpc/client @tanstack/react-query@4.36.1  @trpc/react-query
+## npx prisma migrate dev
