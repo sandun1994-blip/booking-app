@@ -1,5 +1,5 @@
 import { prisma } from '@/db/prisma'
-import { Role } from '@/util/type'
+import { Role } from '@/util/types'
 
 import { TRPCError } from '@trpc/server'
 
@@ -21,18 +21,14 @@ export const authorizeUser = async (
   roles: Role[],
 ): Promise<void> => {
 
-    console.log('role',roles);
+   
     
   if (!roles || roles.length === 0) {
-    throw new TRPCError({code:'UNAUTHORIZED'})
     return // No specific roles required, access is granted
   }
 
   const userRoles = await getUserRoles(uid)
-
-  console.log(userRoles,0);
   
-
   if (!userRoles.some((role) => roles.includes(role))) {
     throw new TRPCError({
       code: 'FORBIDDEN',
