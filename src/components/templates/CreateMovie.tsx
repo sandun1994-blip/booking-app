@@ -15,6 +15,7 @@ import { ImagePreview } from '../molecules/ImagePreview'
 import { useImageUpload } from '@/util/hooks'
 import { Controller } from 'react-hook-form'
 import { ProgressBar } from '../molecules/ProgressBar'
+import { Loading } from '../molecules/Loading'
 
 export interface ICreateMovieProps {}
 
@@ -36,7 +37,7 @@ export const CreateMovie = ({}: ICreateMovieProps) => {
   const { toast } = useToast()
   const { replace } = useRouter()
 
-  const [{ percent, uploading }, uploadImages] = useImageUpload()
+ const [{ percent, uploading }, uploadImages] = useImageUpload()
 
   return (
     <div>
@@ -44,6 +45,7 @@ export const CreateMovie = ({}: ICreateMovieProps) => {
         onSubmit={handleSubmit(
           async ({ director, duration, genre, releaseDate, title }) => {
             const uploadedImages = await uploadImages(posterUrl)
+
 
             await createMovie({
               director,
@@ -96,7 +98,7 @@ export const CreateMovie = ({}: ICreateMovieProps) => {
               </HtmlSelect>
             </Label>
           </div>
-          <Label title="Images" error={errors.posterUrl?.message?.toString()}>
+          <Label title="Image" error={errors.posterUrl?.message?.toString()}>
             <ImagePreview
               src={posterUrl || ''}
               clearImage={() => resetField('posterUrl')}
@@ -118,7 +120,7 @@ export const CreateMovie = ({}: ICreateMovieProps) => {
             {percent > 0 ? <ProgressBar value={percent} /> : null}
           </Label>
         </div>
-        <Button loading={isLoading || uploading} type="submit">
+        <Button loading={isLoading || uploading  } type="submit">
           Submit
         </Button>
       </form>

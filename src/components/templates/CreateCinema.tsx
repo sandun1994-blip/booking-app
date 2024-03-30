@@ -7,10 +7,10 @@ import { Button } from '../atoms/button'
 
 import { useFormContext, useWatch, useFieldArray } from 'react-hook-form'
 
-import { Panel } from '../organisms/Map/Panel'
-import { Marker } from '../organisms/Map/MapMarker'
-import { CenterOfMap, DefaultZoomControls } from '../organisms/Map/ZoomControls'
-import { useMap } from 'react-map-gl'
+// import { Panel } from '../organisms/Map/Panel'
+// import { Marker } from '../organisms/Map/MapMarker'
+// import { CenterOfMap, DefaultZoomControls } from '../organisms/Map/ZoomControls'
+// import { useMap } from 'react-map-gl'
 
 import { HtmlSelect } from '../atoms/select'
 

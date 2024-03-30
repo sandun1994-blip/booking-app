@@ -1,9 +1,9 @@
-import React from 'react'
+import { CreateMovie } from '@/components/templates/CreateMovie'
 
-const page = () => {
+export default function Page() {
   return (
-    <div>page</div>
+    <main>
+      <CreateMovie />
+    </main>
   )
 }
-
-export default page
