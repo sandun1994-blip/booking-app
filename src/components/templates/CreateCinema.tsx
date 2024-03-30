@@ -39,7 +39,7 @@ export const CreateCinema = () => (
 )
 
 export const CreateCinemaContent = ({}: ICreateCinemaProps) => {
-  const { register, handleSubmit, setValue, reset, control } =
+  const { register, handleSubmit, setValue, reset, control, formState: { errors }, } =
     useFormContext<FormTypeCreateCinema>()
   const {
     isLoading,
@@ -77,7 +77,7 @@ export const CreateCinemaContent = ({}: ICreateCinemaProps) => {
           },
         )}
       >
-        <Label title="Cinema">
+        <Label title="Cinema" error={errors.cinemaName?.message}>
           <Input placeholder="Cinema name" {...register('cinemaName')} />
         </Label>
         <Label title="Manager ID">
@@ -92,7 +92,7 @@ export const CreateCinemaContent = ({}: ICreateCinemaProps) => {
         </Label>
         <AddScreens />
 
-        <Button type="submit" loading={isLoading}>
+        <Button type="submit" >
           Create cinema
         </Button>
       </form>
@@ -103,8 +103,8 @@ export const CreateCinemaContent = ({}: ICreateCinemaProps) => {
           zoom: 8,
         }}
       >
-        <MapMarker />
-
+        {/* <MapMarker /> */}
+{/* 
         <Panel position="left-top">
           <SearchBox
             onChange={({ lat, lng }) => {
@@ -123,7 +123,7 @@ export const CreateCinemaContent = ({}: ICreateCinemaProps) => {
               }}
             />
           </DefaultZoomControls>
-        </Panel>
+        </Panel> */}
       </Map>
     </div>
   )
@@ -273,48 +273,48 @@ const ShowLocation = () => {
   )
 }
 
-export const SearchBox = ({
-  onChange,
-}: {
-  onChange: ({ lat, lng }: { lat: number; lng: number }) => void
-}) => {
-  const { current: map } = useMap()
-  return (
-    <SearchPlace
-      onLocationChange={(locationInfo) => {
-        const lat = locationInfo.latitude
-        const lng = locationInfo.longitude
-        onChange({ lat, lng })
+// export const SearchBox = ({
+//   onChange,
+// }: {
+//   onChange: ({ lat, lng }: { lat: number; lng: number }) => void
+// }) => {
+//   const { current: map } = useMap()
+//   return (
+//     <SearchPlace
+//       onLocationChange={(locationInfo) => {
+//         const lat = locationInfo.latitude
+//         const lng = locationInfo.longitude
+//         onChange({ lat, lng })
 
-        map?.flyTo({
-          center: { lat, lng },
-          essential: true,
-        })
-      }}
-    />
-  )
-}
+//         map?.flyTo({
+//           center: { lat, lng },
+//           essential: true,
+//         })
+//       }}
+//     />
+//   )
+// }
 
-const MapMarker = () => {
-  const { address } = useWatch<FormTypeCreateCinema>()
-  const { setValue } = useFormContext<FormTypeCreateCinema>()
+// const MapMarker = () => {
+//   const { address } = useWatch<FormTypeCreateCinema>()
+//   const { setValue } = useFormContext<FormTypeCreateCinema>()
 
-  return (
-    <Marker
-      pitchAlignment="auto"
-      longitude={address?.lng || 0}
-      latitude={address?.lat || 0}
-      draggable
-      onDragEnd={({ lngLat }) => {
-        const { lat, lng } = lngLat
-        setValue('address.lat', lat || 0)
-        setValue('address.lng', lng || 0)
-      }}
-    >
-      <BrandIcon />
-    </Marker>
-  )
-}
+//   return (
+//     <Marker
+//       pitchAlignment="auto"
+//       longitude={address?.lng || 0}
+//       latitude={address?.lat || 0}
+//       draggable
+//       onDragEnd={({ lngLat }) => {
+//         const { lat, lng } = lngLat
+//         setValue('address.lat', lat || 0)
+//         setValue('address.lng', lng || 0)
+//       }}
+//     >
+//       <BrandIcon />
+//     </Marker>
+//   )
+// }
 
 export const StaightMovieScreen = () => {
   return (

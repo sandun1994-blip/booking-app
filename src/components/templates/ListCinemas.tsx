@@ -50,7 +50,7 @@ export const CinemaInfo = ({
                 <div>No shows found.</div>
               </AlertBox>
             ) : null}
-            <ShowScreenShowtimes screenId={screen.id} />
+            {/* <ShowScreenShowtimes screenId={screen.id} /> */}
           </div>
         ))}
       </div>
