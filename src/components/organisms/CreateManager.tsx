@@ -41,7 +41,7 @@ export const CreateManager = ({ className }: ICreateAdminProps) => {
         <Label title="UID">
           <Input placeholder="Enter the uid" {...register('id')} />
         </Label>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" loading>Submit</Button>
       </form>
     </div>
   )

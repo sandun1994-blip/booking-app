@@ -13,7 +13,7 @@ export const UserCard = ({ user, children }: IUserCardProps) => {
   return (
     <div className="flex gap-2">
       <Image
-        src={user.image || '/user.jpeg'}
+        src={user.image || '/user.jpg'}
         alt=""
         width={300}
         height={300}
