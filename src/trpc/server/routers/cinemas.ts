@@ -9,41 +9,66 @@ export const cinemasRouter = createTRPCRouter({
       },
     })
   }),
-  createCinema: protectedProcedure('admin').input(schemaCreateCinema).mutation(({ ctx, input }) => {
-    const { cinemaName, managerId, address, screens } = input
+  myCinemas:protectedProcedure('manager').query(({ctx})=>{
+        return ctx.db.cinema.findMany({
+          where:{Managers:{some:{id:ctx.userId}}},
+          include:{
 
+            Screens:{
+              include:{Showtimes:{
+                include:{Movie:true}
+              }}
+            }
+          }
+        })
+  }),
+  createCinema: protectedProcedure('admin')
+    .input(schemaCreateCinema)
+    .mutation(({ ctx, input }) => {
+      const { cinemaName, managerId, address, screens } = input
 
- const screensWithSeats =screens.map((screen,index)=>{
-  const {rows,columns,...screenData} =screen
-  const seats =[]
+      const screensWithSeats = screens.map((screen, index) => {
+        const { rows, columns, ...screenData } = screen
+        const seats = []
 
-for(let row=1;row<rows;row++){
-  for(let column =1;column<=columns;column++){
-    seats.push({row,column})
-  }
-}
+        for (let row = 1; row < rows; row++) {
+          for (let column = 1; column <= columns; column++) {
+            seats.push({ row, column })
+          }
+        }
 
-return {
-  ...screenData,
-  Seats:{create:seats},
-  number:index
-}
+        return {
+          ...screenData,
+          Seats: { create: seats },
+          number: index,
+        }
+      })
 
+      return ctx.db.cinema.create({
+        data: {
+          name: cinemaName,
+          Address: { create: address },
+          Managers: {
+            connectOrCreate: {
+              create: { id: managerId },
+              where: { id: managerId },
+            },
+          },
+          Screens: { create: screensWithSeats },
+        },
+      })
+    }),
 
- })
-
-    return ctx.db.cinema.create({
-      data: {
-        name: cinemaName,
-        Address:{create:address},
-        Managers: {
-          connectOrCreate: {
-            create: { id: managerId },
-            where: { id: managerId },
+    myScreens: protectedProcedure().query(({ ctx }) => {
+      return ctx.db.screen.findMany({
+        where: {
+          Cinema: {
+            Managers: { some: { id: ctx.session.userId as string } },
           },
         },
-        Screens:{create:screensWithSeats}
-      },
+        include: {
+          Cinema: true,
+        },
+      })
     })
-  }),
 })

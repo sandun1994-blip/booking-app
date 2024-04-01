@@ -15,8 +15,13 @@ export interface ICreateAdminProps extends BaseComponent {}
 
 export const CreateAdmin = ({ className }: ICreateAdminProps) => {
   const { register, handleSubmit, reset } = useFormCreateManager()
-  const { mutateAsync } = trpcClient.admins.create.useMutation()
+  const { mutateAsync,isLoading,error } = trpcClient.admins.create.useMutation()
   const { toast } = useToast()
+
+
+
+
+
   return (
     <div
       className={cn(
@@ -27,6 +32,7 @@ export const CreateAdmin = ({ className }: ICreateAdminProps) => {
       <Title2>Create new admin</Title2>
       <form
         onSubmit={handleSubmit(async ({ id }) => {
+         try {
           const admins = await mutateAsync({ id })
           if (admins) {
             revalidatePath('/admin/adminss')
@@ -35,6 +41,11 @@ export const CreateAdmin = ({ className }: ICreateAdminProps) => {
           } else {
             toast({ title: 'Action failed.' })
           }
+         } catch (er) {
+          console.log(error?.message);
+          toast({ title: error?.message })
+          
+         }
         })}
         className="space-y-2"
       >

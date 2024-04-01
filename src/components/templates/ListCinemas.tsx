@@ -34,13 +34,15 @@ export const CinemaInfo = ({
 }: {
   cinema: RouterOutputs['cinemas']['cinemas'][0]
 }) => {
+
+
   return (
     <div>
       <div className="text-2xl font-semibold">{cinema.name}</div>
       <div className="text-sm text-gray-600 mt-2">
         Screens: {cinema.Screens.length}
       </div>
-      <div className="flex flex-col gap-4 mt-8">
+      <div className="flex flex-col  gap-4 mt-8 ">
         {cinema.Screens.map((screen) => (
           <div key={screen.id}>
             <div className="font-light text-xl ">Screen {screen.number}</div>
@@ -49,8 +51,10 @@ export const CinemaInfo = ({
               <AlertBox>
                 <div>No shows found.</div>
               </AlertBox>
-            ) : null}
-            {/* <ShowScreenShowtimes screenId={screen.id} /> */}
+            ) : null}  
+               
+            <ShowScreenShowtimes screenId={screen.id} />
+           
           </div>
         ))}
       </div>
@@ -63,13 +67,16 @@ export const ShowScreenShowtimes = ({ screenId }: { screenId: number }) => {
     screenId,
   })
 
+  console.log(data);
+  
+
   return data?.map((date) => (
     <div key={date.date}>
       <div className="my-8">
         <div className="mb-2 text-lg font-semibold">
           {formatDate(date.date)}
         </div>
-        <div className="grid grid-cols-3 gap-2 ">
+        <div className="grid grid-cols-3 ">
           {[...date.showtimes]
             .sort(
               (a, b) =>
@@ -77,7 +84,7 @@ export const ShowScreenShowtimes = ({ screenId }: { screenId: number }) => {
                 new Date(b.startTime).getTime(),
             )
             .map((showtime) => (
-              <div className="p-3 border rounded" key={showtime.id}>
+              <div className="p-3 border rounded " key={showtime.id}>
                 <div className="font-semibold text-2xl">
                   {format(showtime.startTime.toString(), 'p')}
                 </div>

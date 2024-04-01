@@ -8,7 +8,7 @@ const ListAdmin = async () => {
   return (
     <div className="mt-6">
       <Title2>Managers</Title2>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid md:grid-cols-3 gap-3">
         {managers?.map(({ User: { id, image, name } }) => (
           <UserCard key={id} user={{ id, name, image }} />
         ))}
