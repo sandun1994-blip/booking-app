@@ -4,6 +4,7 @@ import { useHandleSearch } from '@/util/hooks'
 import { Marker } from '../Map/MapMarker'
 import { BrandIcon } from '@/components/atoms/BrandIcon'
 import { ReactNode } from 'react'
+import { Tv2 } from 'lucide-react'
 
 export const MarkerCinema = ({
   cinema,
@@ -25,7 +26,7 @@ export const MarkerCinema = ({
         addParam('cinemaId', cinema.id)
       }}
     >
-      <BrandIcon className="cursor-pointer" />
+<Tv2/>
       <MarkerText>{cinema.name.split(' ').slice(0, 2).join(' ')}</MarkerText>
     </Marker>
   )

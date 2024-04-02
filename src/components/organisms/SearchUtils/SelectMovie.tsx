@@ -9,7 +9,7 @@ export const SelectMovie = ({ cinemaId }: { cinemaId: number }) => {
     cinemaId,
   })
 
-  const { params, addParam, deleteParam } = useHandleSearch()
+  const { params, addParam, deleteParams } = useHandleSearch()
 
   if (data?.length === 0) {
     return <div>Currently no shows are running in this cinema.</div>
@@ -25,8 +25,7 @@ export const SelectMovie = ({ cinemaId }: { cinemaId: number }) => {
           <button
             key={movie.id}
             onClick={() => {
-              deleteParam('showtimeId')
-              deleteParam('screenId')
+              deleteParams(['showtimeId','screenId'])
               addParam('movieId', movie.id)
             }}
           >

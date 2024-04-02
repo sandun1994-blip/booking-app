@@ -150,18 +150,18 @@ export const useHandleSearch = () => {
     router.replace(`${pathname}?${params}`)
   }
 
-  const deleteParam = (key: string) => {
-    params.delete(key)
+  const deleteParams = (keys: string[]) => {
+    keys.forEach(key => params.delete(key));
     console.log('delete:params', params.toString())
   }
 
   const deleteAll = () => {
-    router.replace('/cinemas')
+    router.replace('/')
 
     console.log('deleteAll:params', params.toString())
   }
 
-  return { params, addParam, deleteParam, deleteAll }
+  return { params, addParam, deleteParams, deleteAll }
 }
 
 /**
@@ -170,7 +170,7 @@ export const useHandleSearch = () => {
 
 export function useGetCinema({ cinemaId }: { cinemaId: string | null }) {
   const { data, refetch } = trpcClient.cinemas.cinema.useQuery(
-    { cinemaId: +(cinemaId || '') },
+    { id: +(cinemaId || '') },
     { enabled: false },
   )
 

@@ -110,6 +110,9 @@ export const showtimesRoutes = createTRPCRouter({
       // Group showtimes by date
       const showtimesByDate = reduceShowtimeByDate(rawShowtimes)
 
+      console.log(showtimesByDate);
+      
+
       // Convert object to the desired array format
       return Object.values(showtimesByDate)
     }),

@@ -1,15 +1,17 @@
 import { trpcClient } from '@/trpc/clients/client'
 import { useEffect, useMemo, useState } from 'react'
-import { LngLatBounds, useMap } from 'react-map-gl'
+import { LngLatBounds, Marker, useMap } from 'react-map-gl'
 import { MarkerCinema } from './MarkerCinema'
 import { MovieDialog } from './MovieDialog'
 
 export const DisplayCinemas = () => {
+
   const { current: map } = useMap()
 
   const [bounds, setBounds] = useState<LngLatBounds>()
   useEffect(() => {
     const bounds = map?.getBounds()
+    
     setBounds(bounds)
   }, [map])
 
@@ -22,12 +24,13 @@ export const DisplayCinemas = () => {
     }),
     [bounds],
   )
-
+ 
   const { data, refetch } = trpcClient.cinemas.searchCinemas.useQuery({
     addressWhere: locationFilter,
   })
 
-  console.log('data', data)
+  console.log(data);
+  
 
   useEffect(() => {
     refetch()
@@ -38,6 +41,8 @@ export const DisplayCinemas = () => {
       <MovieDialog />
 
       {data?.map((cinema) => <MarkerCinema key={cinema.id} cinema={cinema} />)}
+
+      
     </>
   )
 }
