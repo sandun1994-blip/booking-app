@@ -131,5 +131,5 @@ export const QRCode = ({ url }: { url: string }) => {
 
   if (loading) return <Loading />
 
-  return <Image width={200} height={200} src={picUrl || ''} alt={'ticket'} />
+  return <Image width={400} height={400} src={picUrl || ''} alt={'ticket'} />
 }

@@ -4,6 +4,8 @@ import { cinemasRouter } from "./cinemas";
 import { managerRoutes } from "./manager";
 import { moviesRouter } from "./movies";
 import { showtimesRoutes } from "./showtimes";
+import { stripeRoutes } from "./stripe";
+import { ticketsRoutes } from "./tickets";
 
 
 export const appRouter =createTRPCRouter({
@@ -12,9 +14,8 @@ export const appRouter =createTRPCRouter({
    cinemas: cinemasRouter,
    managers:managerRoutes,
    showtimes: showtimesRoutes,
-   //managers: managersRoutes,
-   // stripe: stripeRoutes,
-   // tickets: ticketsRoutes,
+    stripe: stripeRoutes,
+    tickets: ticketsRoutes,
 
 })
 
