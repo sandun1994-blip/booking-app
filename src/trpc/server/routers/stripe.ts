@@ -1,9 +1,10 @@
 import { z } from 'zod'
+import * as bwipjs from 'bwip-js';
 import { createTRPCRouter, protectedProcedure } from '..'
 import { stripe } from '@/db/stripe'
 import { TRPCError } from '@trpc/server'
 import { firebaseUpload } from '@/util/storage/upload'
-import * as bwipjs from 'bwip-js'
+
 import { format } from 'date-fns'
 
 const paymentSchema = z.object({

@@ -1,4 +1,3 @@
-import LocationOfCinemas from '@/components/customComponents/LocationOfCinemas'
 import { SearchCinemas } from '@/components/templates/SearchCinemas'
 import { trpcClient } from '@/trpc/clients/client'
 import { trpcServer } from '@/trpc/clients/server'

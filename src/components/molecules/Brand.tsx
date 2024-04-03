@@ -14,9 +14,9 @@ export const Brand = () => {
           'hover:underline font-semibold font-serif underline-offset-4 text-primary-500',
         )}
       >
-        Showtime!
+        Showtime!aaaa
       </Link>
-      <DeveloperInfo />
+      {/* <DeveloperInfo /> */}
     </div>
   )
 }
